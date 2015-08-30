@@ -15,7 +15,6 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
-    @location.current_capacity = 0
   end
 
   # GET /locations/1/edit
