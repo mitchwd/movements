@@ -15,5 +15,14 @@
   <%= @person.school_identifier %>
 </p>
 
+<p>
+  <strong>Identifiers:</strong>
+  <ul>
+    <% for identifier in @person.identifiers %>
+      <li><%= link_to identifier.code, identifier %></li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
