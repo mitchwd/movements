@@ -1,6 +1,9 @@
 class Identifier < ActiveRecord::Base
   belongs_to :person
 
-  validates_associated :person, :on => :create, :message => "must be a valid person"
-  validates_presence_of :person, :code, :on => :create, :message => "can't be blank"
+  default_scope { order(code: :asc) }
+
+  validates_associated :person
+  validates_presence_of :person, :code
+  validates_uniqueness_of :code
 end
