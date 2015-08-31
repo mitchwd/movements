@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :movements, only: [ :index, :show, :new, :create ]
   resources :locations
   resources :identifiers
   resources :people

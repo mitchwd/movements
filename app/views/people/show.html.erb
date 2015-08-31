@@ -16,6 +16,15 @@
 </p>
 
 <p>
+  <strong>Latest Locations:</strong>
+  <ul>
+    <% for movement in @person.movements %>
+      <li><%= link_to movement.location.name, movement.location %> (<%= link_to  time_ago_in_words(movement.created_at) + " ago", movement %>) </li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
   <strong>Identifiers:</strong>
   <ul>
     <% for identifier in @person.identifiers %>

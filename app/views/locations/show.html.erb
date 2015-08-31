@@ -15,5 +15,17 @@
   <%= @location.current_capacity %>
 </p>
 
+<p>
+  <strong>Current Occupants:</strong>
+  <ul>
+    <% for movement in @location.movements %>
+      <li>
+        <%= link_to movement.person.fullname, movement.person %>
+        (<%= link_to  time_ago_in_words(movement.created_at) + " ago", movement %>)
+      </li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>

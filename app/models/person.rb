@@ -1,5 +1,7 @@
 class Person < ActiveRecord::Base
   has_many :identifiers, dependent: :destroy
+  has_many :movements
+  has_many :locations, :through => :movements
 
   default_scope { order(last_name: :asc)}
 
