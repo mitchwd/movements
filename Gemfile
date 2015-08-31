@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem 'rack-timeout'
 
+# Use cocoon for nested attributes
+gem 'cocoon'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

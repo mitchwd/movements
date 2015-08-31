@@ -1,13 +1,15 @@
 class Person < ActiveRecord::Base
   require 'csv'
 
-  has_many :identifiers, dependent: :destroy
+  has_many :identifiers, inverse_of: :person, dependent: :destroy
   has_many :movements
   has_many :locations, :through => :movements
 
   default_scope { order(last_name: :asc)}
 
   validates_presence_of :first_name, :last_name, :on => :create, :message => "can't be blank"
+
+  accepts_nested_attributes_for :identifiers, reject_if: :all_blank, allow_destroy: true
 
   def fullname
     first_name + " " + last_name
