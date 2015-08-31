@@ -29,3 +29,17 @@
 <br>
 
 <%= link_to 'New Person', new_person_path %>
+
+<div class="csv">
+  <div class="import">
+    <h3>Import a CSV</h3>
+    <%= form_tag import_people_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import CSV" %>
+    <% end %>
+  </div>
+  <div class="export">
+    <h3>Export a CSV</h3>
+    <%= link_to "Export a CSV", people_path(format: :csv) %>
+  </div>
+</div>

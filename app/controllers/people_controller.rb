@@ -5,6 +5,11 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @people.as_csv }
+    end
   end
 
   # GET /people/1
@@ -58,6 +63,15 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def import
+    begin
+      Person.import(params[:file])
+      redirect_to root_url, notice: "People imported."
+    rescue
+      redirect_to root_url, notice: "Invalid CSV file format."
     end
   end
 
