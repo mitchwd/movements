@@ -7,8 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <div>
+      <h1>Movements</h1>
+      <%= link_to "People", people_path %> |
+      <%= link_to "Identifiers", identifiers_path %> |
+      <%= link_to "Locations", locations_path %> |
+      <%= link_to "Movements", movements_path %>
+    </div>
+  </header>
 
-<%= yield %>
+  <%= yield %>
+
+  <footer>
+    <br />
+    Created by <%= link_to "@mitchwd", "http://www.twitter.com/mitchwd" %>
+  </footer>
 
 </body>
 </html>
