@@ -39,6 +39,9 @@ class MovementsController < ApplicationController
     # curl -s -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d '{"movement": {"location_id": "1", "identifier_code": "234"}}' http://localhost:3000/sign_in.json
     # -> 201 (Success: Record created)
   def sign_in
+    # Could this code be replaced with: ...?
+    # @location << @person
+
     @movement = Movement.new
     @movement.location = Location.where(id: movement_params[:location_id]).take!
     @movement.person = Identifier.where(code: movement_params[:identifier_code]).take!.person
