@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150904095724) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "identifiers", ["code"], name: "index_identifiers_on_code"
   add_index "identifiers", ["person_id"], name: "index_identifiers_on_person_id"
 
   create_table "locations", force: :cascade do |t|
