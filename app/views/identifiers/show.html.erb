@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= link_to @identifier.person.fullname, @identifier.person %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @identifier.code %>
+</p>
+
+<%= link_to 'Edit', edit_identifier_path(@identifier) %> |
+<%= link_to 'Back', identifiers_path %>

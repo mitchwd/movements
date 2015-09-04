@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= link_to @movement.person.fullname, @movement.person %></strong> entered <strong><%= link_to @movement.location.name, @movement.location %></strong>, <strong><%=  time_ago_in_words(@movement.created_at) + " ago" %></strong>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @movement.notes %>
+</p>
+
+<%= link_to 'Back', movements_path %>
