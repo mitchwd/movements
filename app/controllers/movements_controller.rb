@@ -43,6 +43,8 @@ class MovementsController < ApplicationController
     @movement.location = Location.where(id: movement_params[:location_id]).take!
     @movement.person = Identifier.where(code: movement_params[:identifier_code]).take!.person
 
+    @movement.location.increment!(:current_capacity)
+
     respond_to do |format|
       if @movement.save
         format.json { render :show, status: :created, location: @movement }
