@@ -8,6 +8,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json
       format.csv { send_data @people.as_csv }
     end
   end
