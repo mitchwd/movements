@@ -3,9 +3,7 @@
 one:
   name: MyString
   capacity: 1
-  current_capacity: 1
 
 two:
   name: MyString
   capacity: 1
-  current_capacity: 1

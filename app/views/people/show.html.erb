@@ -16,7 +16,12 @@
 </p>
 
 <p>
-  <strong>Latest Locations:</strong>
+  <strong>Current Location:</strong>
+  <%= link_to @person.location.name, @person.location %>
+</p>
+
+<p>
+  <strong>Latest Movements:</strong>
   <ul>
     <% for movement in @person.movements %>
       <li><%= link_to movement.location.name, movement.location %> (<%= link_to  time_ago_in_words(movement.created_at) + " ago", movement %>) </li>

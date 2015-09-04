@@ -3,7 +3,11 @@ class Person < ActiveRecord::Base
 
   has_many :identifiers, inverse_of: :person, dependent: :destroy
   has_many :movements
-  has_many :locations, :through => :movements
+  has_many :locations, through: :movements
+
+  def location
+    self.movements.last.location
+  end
 
   default_scope { order(last_name: :asc)}
 

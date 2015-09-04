@@ -15,7 +15,6 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
-    @location.current_capacity = 0
   end
 
   # GET /locations/1/edit
@@ -70,6 +69,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :capacity, :current_capacity)
+      params.require(:location).permit(:name, :capacity)
     end
 end

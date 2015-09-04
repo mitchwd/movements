@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830085426) do
+ActiveRecord::Schema.define(version: 20150904095724) do
 
   create_table "identifiers", force: :cascade do |t|
     t.integer  "person_id"
@@ -25,9 +25,8 @@ ActiveRecord::Schema.define(version: 20150830085426) do
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "capacity"
-    t.integer  "current_capacity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movements", force: :cascade do |t|
