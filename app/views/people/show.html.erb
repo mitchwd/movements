@@ -17,7 +17,11 @@
 
 <p>
   <strong>Current Location:</strong>
-  <%= link_to @person.location.name, @person.location %>
+  <% if @person.movements.exists? %>
+    <%= link_to @person.location.name, @person.location %>
+  <% else %>
+    No location records exist for this person.
+  <% end %>
 </p>
 
 <p>
