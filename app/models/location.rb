@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
   has_many :movements
-  has_many :people, through: :movements
+  has_many :people, -> { uniq }, through: :movements
 
   validates_presence_of :name
   validates :capacity,
