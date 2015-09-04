@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :people do
     collection { post :import }
   end
+  post 'sign_in' => "movements#sign_in"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
