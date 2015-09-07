@@ -1,5 +1,10 @@
 class Person < ActiveRecord::Base
   require 'csv'
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :first_name, :last_name, :fullname, :school_identifier
+  end
 
   has_many :identifiers, inverse_of: :person, dependent: :destroy
   has_many :movements

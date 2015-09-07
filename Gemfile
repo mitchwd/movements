@@ -33,6 +33,9 @@ gem 'rack-timeout'
 # Use cocoon for nested attributes
 gem 'cocoon'
 
+# Use Algolia for search
+gem 'algoliasearch-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

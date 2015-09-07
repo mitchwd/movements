@@ -1,4 +1,10 @@
 class Location < ActiveRecord::Base
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :name
+  end
+
   has_many :movements
   has_many :people, -> { uniq }, through: :movements
 

@@ -1,4 +1,10 @@
 class Identifier < ActiveRecord::Base
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :code
+  end
+
   belongs_to :person
 
   default_scope { order(code: :asc) }
