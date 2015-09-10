@@ -18,6 +18,7 @@ Identifier.create!([
   {person_id: 7, code: "789"}
 ])
 Location.create!([
+  {name: "Unknown"},
   {name: "Theatre", capacity: 50},
   {name: "Art Studio", capacity: 10},
   {name: "Gym", capacity: 100},

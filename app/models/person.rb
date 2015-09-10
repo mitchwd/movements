@@ -11,7 +11,11 @@ class Person < ActiveRecord::Base
   has_many :locations, through: :movements
 
   def location
-    self.movements.last.location
+    if self.movements.exists?
+      self.movements.last.location
+    else
+      Location.first
+    end
   end
 
   default_scope { order(last_name: :asc)}
