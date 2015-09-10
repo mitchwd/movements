@@ -35,6 +35,7 @@ gem 'cocoon'
 
 # Use Algolia for search
 gem 'algoliasearch-rails'
+gem 'hogan_assets'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
