@@ -2,7 +2,7 @@ class Identifier < ActiveRecord::Base
   include AlgoliaSearch
 
   algoliasearch do
-    attribute :code
+    attribute :code, :person_name
   end
 
   belongs_to :person
@@ -12,4 +12,8 @@ class Identifier < ActiveRecord::Base
   validates_associated :person
   validates_presence_of :person, :code
   validates_uniqueness_of :code
+
+  def person_name
+    self.person.fullname
+  end
 end

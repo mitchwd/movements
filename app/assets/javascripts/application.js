@@ -16,4 +16,5 @@
 //= require_tree .
 //= require cocoon
 //= require algolia/algoliasearch.min
+//= require algolia/typeahead.jquery
 //= require hogan.js

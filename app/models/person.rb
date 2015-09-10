@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   include AlgoliaSearch
 
   algoliasearch do
-    attribute :first_name, :last_name, :fullname, :school_identifier
+    attribute :first_name, :last_name, :fullname, :school_identifier, :location_name
   end
 
   has_many :identifiers, inverse_of: :person, dependent: :destroy
@@ -16,6 +16,10 @@ class Person < ActiveRecord::Base
     else
       Location.first
     end
+  end
+
+  def location_name
+    location.name
   end
 
   default_scope { order(last_name: :asc)}
