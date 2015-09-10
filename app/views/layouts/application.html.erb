@@ -33,20 +33,26 @@
         // Mustache templating by Hogan.js (http://mustache.github.io/)
         var templatePerson = Hogan.compile(
           '<div class="person">' +
-            '<div class="fullname">{{{ _highlightResult.fullname.value }}} <small>({{ location_name }})</small></div>' +
-            '<div class="location">{{{ _highlightResult.location_name.value }}}</div>' +
+            '<a href="/people/{{{ objectID }}}">' +
+              '<div class="fullname">{{{ _highlightResult.fullname.value }}} <small>({{ location_name }})</small></div>' +
+              '<div class="location">{{{ _highlightResult.location_name.value }}}</div>' +
+            '</a>' +
           '</div>');
         var templateLocation = Hogan.compile(
           '<div class="location">' +
-            '<div class="name">{{{ _highlightResult.name.value }}}</div>' +
+            '<a href="/locations/{{{ objectID }}}">' +
+              '<div class="name">{{{ _highlightResult.name.value }}}</div>' +
+            '</a>' +
           '</div>');
         var templateIdentifier = Hogan.compile(
           '<div class="identifier">' +
-            '<div class="person">{{{ person_name }}} <small>({{{ _highlightResult.code.value }}})</small> </div>' +
+            '<a href="/identifiers/{{{ objectID }}}">' +
+              '<div class="person">{{{ person_name }}} <small>({{{ _highlightResult.code.value }}})</small> </div>' +
+            '</a>' +
           '</div>');
 
         // typeahead.js initialization
-        $('#person-search').typeahead({hint: false}, [{
+        $('#person-search').typeahead({hint: true}, [{
             source: locations.ttAdapter({hitsPerPage: 5}),
             displayKey: 'fullname',
             templates: {
