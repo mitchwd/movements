@@ -37,6 +37,8 @@ gem 'cocoon'
 gem 'algoliasearch-rails'
 gem 'hogan_assets'
 
+gem "twitter-bootstrap-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
