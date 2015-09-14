@@ -1,12 +1,26 @@
 class Person < ActiveRecord::Base
   require 'csv'
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :first_name, :last_name, :fullname, :school_identifier, :location_name
+  end
 
   has_many :identifiers, inverse_of: :person, dependent: :destroy
   has_many :movements
   has_many :locations, through: :movements
 
   def location
-    self.movements.last.location
+    if self.movements.exists?
+      # Set as first, because of default_scope sort order
+      self.movements.first.location
+    else
+      Location.first
+    end
+  end
+
+  def location_name
+    location.name
   end
 
   default_scope { order(last_name: :asc)}
