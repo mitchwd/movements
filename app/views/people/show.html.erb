@@ -1,46 +1,42 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Person -%>
+<div class="page-header">
+  <h1><%= @person.first_name %> <%= @person.last_name %></h1>
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @person.first_name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:school_identifier) %>:</strong></dt>
+  <dd><%= @person.school_identifier %></dd>
+  <dt><strong>Current Location:</strong></dt>
+  <dd><% if @person.movements.exists? %>
+        <%= link_to @person.location.name, @person.location %>
+      <% else %>
+        No location records exist for this person.
+      <% end %>
+  </dd>
+  <dt>Latest Movements:</dt>
+  <dd>
+    <ul>
+      <% for movement in @person.movements %>
+        <li><%= link_to movement.location.name, movement.location %> (<%= link_to  time_ago_in_words(movement.created_at) + " ago", movement %>) </li>
+      <% end %>
+    </ul>
+  </dd>
+  <dt>Identifiers:</dt>
+  <dd>
+    <ul>
+      <% for identifier in @person.identifiers %>
+        <li><%= link_to identifier.code, identifier %></li>
+      <% end %>
+    </ul>
+  </dd>
+</dl>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @person.last_name %>
-</p>
-
-<p>
-  <strong>School identifier:</strong>
-  <%= @person.school_identifier %>
-</p>
-
-<p>
-  <strong>Current Location:</strong>
-  <% if @person.movements.exists? %>
-    <%= link_to @person.location.name, @person.location %>
-  <% else %>
-    No location records exist for this person.
-  <% end %>
-</p>
-
-<p>
-  <strong>Latest Movements:</strong>
-  <ul>
-    <% for movement in @person.movements %>
-      <li><%= link_to movement.location.name, movement.location %> (<%= link_to  time_ago_in_words(movement.created_at) + " ago", movement %>) </li>
-    <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Identifiers:</strong>
-  <ul>
-    <% for identifier in @person.identifiers %>
-      <li><%= link_to identifier.code, identifier %></li>
-    <% end %>
-  </ul>
-</p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              people_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_person_path(@person), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              person_path(@person),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

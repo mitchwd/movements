@@ -1,41 +1,58 @@
-<%= form_for(@person) do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+<%= form_for @person, :html => { :class => "form-horizontal person" } do |f| %>
 
-      <ul>
-      <% @person.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @person.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @person.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :school_identifier %><br>
-    <%= f.text_field :school_identifier %>
-  </div>
-
-  <h3>Identifiers:</h3>
-  <div id="identifiers">
-    <%= f.fields_for :identifiers do |identifier| %>
-      <%= render 'identifier_fields', f: identifier %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association 'Add New Identifier', f, :identifiers %>
+  <div class="control-group">
+    <%= f.label :first_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :first_name, :class => 'form-control' %>
     </div>
+    <%= error_span(@person[:first_name]) %>
   </div>
+  <div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@person[:last_name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :school_identifier, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :school_identifier, :class => 'form-control' %>
+    </div>
+    <%= error_span(@person[:school_identifier]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :identifiers, :class => 'control-label' %>
+    <div class="controls">
+      <div id="identifiers">
+        <%= f.fields_for :identifiers do |identifier| %>
+          <%= render 'identifier_fields', f: identifier %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association '+ New Code', f, :identifiers, class: "btn btn-primary btn-xs" %>
 
-  <div class="actions">
-    <br />
-    <%= f.submit %>
+    </div>
+    <%= error_span(@person[:identifiers]) %>
   </div>
+  <br />
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            people_path, :class => 'btn btn-default' %>
+
 <% end %>

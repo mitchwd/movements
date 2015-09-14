@@ -1,47 +1,67 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing People</h1>
-
-<table>
+<%- model_class = Person -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>School identifier</th>
-      <th>Location</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:first_name) %></th>
+      <th><%= model_class.human_attribute_name(:last_name) %></th>
+      <th><%= model_class.human_attribute_name(:school_identifier) %></th>
+      <th><%= model_class.human_attribute_name(:location) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= person.first_name %></td>
-        <td><%= person.last_name %></td>
+        <td><%= link_to person.first_name, person_path(person) %></td>
+        <td><%= link_to person.last_name, person_path(person) %></td>
         <td><%= person.school_identifier %></td>
-        <td><%= person.location.name if person.movements.exists? %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= person.location_name %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_person_path(person), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      person_path(person),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_person_path,
+            :class => 'btn btn-primary' %>
 
-<%= link_to 'New Person', new_person_path %>
+<br />  <br />
 
-<div class="csv">
-  <div class="import">
-    <h3>Import a CSV</h3>
-    <%= form_tag import_people_path, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Import CSV" %>
-    <% end %>
+
+<div class="panel panel-default hidden">
+  <div class="panel-heading">
+    <div class="panel-title">CSV Import/Export</div>
   </div>
-  <div class="export">
-    <h3>Export a CSV</h3>
-    <%= link_to "Export a CSV", people_path(format: :csv) %>
+  <div class="panel-body">
+    Import
+
+      <%= form_tag import_people_path, multipart: true do %>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-primary btn-file">
+              Browse&hellip; <%= file_field_tag :file %>
+            </span>
+          </span>
+          <input type="text" class="form-control" readonly>
+          <%= submit_tag "Import", class: "btn btn-primary" %>
+        </div>
+
+
+      <% end %>
+
+    Export: <%= link_to "as CSV", people_path(format: :csv), class: "btn btn-primary btn-xs" %>
+    </div>
   </div>
 </div>
