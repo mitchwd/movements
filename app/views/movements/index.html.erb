@@ -1,16 +1,30 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Movement -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:person) %></th>
+      <th><%= model_class.human_attribute_name(:entered_location) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movements.each do |movement| %>
+      <tr>
+        <td><%= movement.person.fullname %></td>
+        <td><%= movement.location.name %></td>
+        <td><%= time_ago_in_words(movement.created_at) + " ago" %></td>
+        <td>
+          <%= link_to 'Show', movement_path(movement), class: "btn btn-default btn-xs"%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<h1>Listing Movements</h1>
-
-<ul>
-  <% @movements.each do |movement| %>
-    <li>
-        <strong><%= link_to movement.person.fullname, movement.person %></strong> entered <strong><%= link_to movement.location.name, movement.location %></strong>, <strong><%=  time_ago_in_words(movement.created_at) + " ago" %></strong>
-        <%= link_to "Show", movement %>
-    </li>
-  <% end %>
-</ul>
-
-<br>
-
-<%= link_to 'New Movement', new_movement_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_movement_path,
+            :class => 'btn btn-primary' %>

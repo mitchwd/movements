@@ -1,12 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Movement -%>
+<div class="page-header">
+  <h1><%= link_to @movement.person.fullname, @movement.person %> entered <%= link_to @movement.location.name, @movement.location %></h1>
+</div>
 
-<p>
-  <strong><%= link_to @movement.person.fullname, @movement.person %></strong> entered <strong><%= link_to @movement.location.name, @movement.location %></strong>, <strong><%=  time_ago_in_words(@movement.created_at) + " ago" %></strong>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:entered) %>:</strong></dt>
+  <dd><%= time_ago_in_words(@movement.created_at) + ' ago' %> (<%= @movement.created_at %>)</dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
+  <dd><%= @movement.notes %></dd>
+</dl>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @movement.notes %>
-</p>
-
-<%= link_to 'Back', movements_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              movements_path, :class => 'btn btn-default'  %>
