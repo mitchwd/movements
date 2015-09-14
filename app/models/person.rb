@@ -12,7 +12,8 @@ class Person < ActiveRecord::Base
 
   def location
     if self.movements.exists?
-      self.movements.last.location
+      # Set as first, because of default_scope sort order
+      self.movements.first.location
     else
       Location.first
     end
