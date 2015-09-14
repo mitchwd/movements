@@ -14,7 +14,7 @@
  *= require_self
  */
 
- .twitter-typeahead { width: 40%; }
+.twitter-typeahead { width: 40%; }
 .twitter-typeahead .tt-input, .twitter-typeahead .tt-hint { width: 100%; margin: 0px; padding: 8px 12px; border: 2px solid #ccc; outline: none; }
 .twitter-typeahead .tt-input:focus { border: 2px solid #0097cf; }
 .twitter-typeahead .tt-hint { color: #999; }
